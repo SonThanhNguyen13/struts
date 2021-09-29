@@ -1,0 +1,47 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 22, 2021, 3:11:16 PM
+    Author     : sonthanhnguyen
+*/
+
+
+footer{
+    width: 100%;
+}
+
+.book-detail{
+    display: flex;
+}
+
+.book-detail .book-info{
+    margin-left: 100px;
+}
+.description{
+    height: 357px;
+}
+
+.comment-row{
+    display: flex;
+}
+.comment{
+    padding: 7px;
+    background-color: ghostwhite;
+    border-radius: 30px;
+}
+
+.contend-comment{
+    margin-left: 20px;
+}
+
+.delete-button{
+    border: none;
+    background-color: white;
+}
+i:hover{
+    border-radius: 20px;
+    background-color: aquamarine;
+}

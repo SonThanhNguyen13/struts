@@ -1,0 +1,133 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!--    <include file="user.xml"/>-->
+    <!-- Configuration for the default package. -->
+    <package name="default" extends="struts-default">
+        <default-action-ref name="index" />
+        <action name= "index" class="controller.UserAction.index">
+            <result name="success">base/index.jsp</result>
+        </action>
+        <action name="bookDetail" class="controller.UserAction.BookDetailAction" method="execute">
+            <result name="success">base/bookDetail.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+        <action name="login" class="controller.UserAction.LoginAction">
+            <result name="success">base/login.jsp</result>
+        </action>
+        <action name="checkLogin" class="controller.UserAction.LoginAction" method="checkLogin">
+            <interceptor-ref name="token"/>
+            <interceptor-ref name="basicStack"/>
+            <result name="invalid.token">base/login.jsp</result>
+            <result name="success" type="redirect">${"/"}</result>
+            <result name="error" >base/login.jsp</result>
+        </action>
+        <action name="logout" class="controller.UserAction.LoginAction" method="logout">
+            <result name="success" type="redirect">${"/"}</result>
+        </action>
+        <action name="register" class="controller.UserAction.RegisterAction" method="execute">
+            <result name="success">base/register.jsp</result>
+        </action>
+        <action name="getRegister" class="controller.UserAction.RegisterAction" method="getRegister">
+            <interceptor-ref name="token"/>
+            <interceptor-ref name="basicStack"/>
+            <result name="invalid.token">base/register.jsp</result>
+            <result name="success">base/register.jsp</result>
+            <result name="error">base/register.jsp</result>
+        </action> 
+        <action name="updateUserPage" class="controller.UserAction.UpdateUserAction" method="execute">
+            <result name="success">base/updateUser.jsp</result>
+        </action>
+        <action name="updateUser" class="controller.UserAction.UpdateUserAction" method="updateUser">
+            <result name="success">base/updateUser.jsp</result>
+            <result name="error">base/updateUser.jsp</result>
+        </action>
+        <action name="search" class="controller.UserAction.index" method="searchBook">
+            <result name="success">base/index.jsp</result>
+        </action>
+        <action name="createComment" class="controller.UserAction.CommentAction" method="createComment">
+            <result name="success" type="redirectAction">
+                <param name="bookID">${bookID}</param>
+                <param name="actionName">bookDetail</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="bookID">${bookID}</param>
+                <param name="actionName">bookDetail</param>
+            </result>
+        </action>
+        <action name="deleteComment" class="controller.UserAction.CommentAction" method="deleteComment">
+            <result name="success" type="redirectAction">
+                <param name="bookID">${bookID}</param>
+                <param name="actionName">bookDetail</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="bookID">${bookID}</param>
+                <param name="actionName">bookDetail</param>
+            </result>
+        </action>
+    </package>
+    <package name="admin" namespace="/admin" extends="struts-default">
+        <action name="userList" class="controller.AdminAction.UserAction.UserListAction" method="execute">
+            <result name="success">userList.jsp</result>
+            <result name="error" type="redirect">${"/"}</result>
+        </action>
+        <action name="createUserPage" class="controller.AdminAction.UserAction.CreateUserAction" method="execute">
+            <result name="success">createUser.jsp</result>
+        </action>
+        <action name="createUser" class="controller.AdminAction.UserAction.CreateUserAction" method="createUser">
+            <result name="success">createUser.jsp</result>
+            <result name="error">createUser.jsp</result>
+        </action>
+        <action name="updateUserPage" class="controller.AdminAction.UserAction.UpdateUserAction" method="execute">
+            <result name="success">updateUser.jsp</result>
+            <result name="error">../error.jsp</result>
+        </action>
+        <action name="updateUser" class="controller.AdminAction.UserAction.UpdateUserAction" method="updateUser">
+            <result name="success">updateUser.jsp</result>
+            <result name="error">updateUser.jsp</result>
+        </action>
+        <action name="deleteUserPage" class="controller.AdminAction.UserAction.DeleteUserAction" method="execute">
+            <result name="success">deleteUser.jsp</result>
+            <result name="error">../error.jsp</result>
+        </action>
+        <action name="deleteUser" class="controller.AdminAction.UserAction.DeleteUserAction" method="deleteUser">
+            <result name="success" type="redirectAction">userList</result>
+            <result name="error">userList.jsp</result>
+            <result name="error">../error.jsp</result>
+        </action>
+        <action name="bookList" class="controller.AdminAction.BookAction.BookListAction" method="execute">
+            <result name="success">bookList.jsp</result>
+            <result name="error" type="redirect">${"/"}</result>
+        </action>
+        <action  name="createBookPage" class="controller.AdminAction.BookAction.CreateBookAction" method="execute">
+            <result name="success">createBook.jsp</result>
+        </action>
+        <action name="createBook" class="controller.AdminAction.BookAction.CreateBookAction" method="createBook">
+            <interceptor-ref name="token"/>
+            <interceptor-ref name="basicStack"/>
+            <result name="invalid.token">createBook.jsp</result>
+            <result name="success">createBook.jsp</result>
+            <result name="error">createBook.jsp</result>
+        </action>
+        <action name="updateBookPage" class="controller.AdminAction.BookAction.UpdateBookAction" method="execute">
+            <result name="success">updateBook.jsp</result>
+            <result name="error">../error.jsp</result>
+        </action>
+        <action name="updateBook" class="controller.AdminAction.BookAction.UpdateBookAction" method="updateBook">
+            <result name="success">updateBook.jsp</result>
+            <result name="error">../error.jsp</result>
+        </action>
+        <action name="deleteBookPage" class="controller.AdminAction.BookAction.DeleteBookAction" method="execute">
+            <result name="success">deleteBook.jsp</result>
+            <result name="error">../error.jsp</result>
+        </action>
+        <action name="deleteBook" class="controller.AdminAction.BookAction.DeleteBookAction" method="deleteBook">
+            <result name="success" type="redirectAction">bookList</result>
+            <result name="error">deleteBook.jsp</result>
+            <result name="error">../error.jsp</result>
+        </action>
+    </package>
+    <constant name="struts.multipart.saveDir" value="C:/Users/sonthanhnguyen/Desktop/BookStore/web/assest" />
+</struts>
